@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Grid Order</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-gap: 2px;
+            max-width: 200px;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 20;
+            height: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+    <script>
+        const grid = document.querySelector('.grid');
+
+        var today = new Date();
+        var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+
+
+        
+
+
+        for (let i = 0; i < 100; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            const value = Math.floor(Math.random() * 100) + 1; // Random temperature value
+
+
+            if(value >= 90)
+            {
+
+                cell.style.backgroundColor = "#fdc723"
+                cell.style.color = "#573329"
+            }
+            else{
+
+                cell.style.backgroundColor = "#2d333b"
+                  cell.style.color = "#2d333b"
+            }
+
+
+            cell.textContent = i + 1; // Displaying grid order
+            grid.appendChild(cell);
+        }
+    </script>
+</body>
+</html>
