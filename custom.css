@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "Charm";
-  src: url(Charm-Regular.ttf);
+  font-family: "Charmonman";
+  src: url(Charmonman-Regular.ttf);
 }
 
 body {
-  font-family: "Charm" !important;
+  font-family: "Charmonman" !important;
 }
 
 .grid {
@@ -18,9 +18,7 @@ body {
 p {
   font-size: 20px;
   color: #eeeeee;
-  text-shadow: 2px 2px #111111;
-
-
+  text-shadow: 2px 1px #111111;
 }
 
 .cell {
