@@ -2277,12 +2277,6 @@ var dayNames = [
   "วันเสาร์",
 ];
 
-// Get the reference to the <img> element
 var imgElement = document.querySelector(".carousel-item.active img");
-
-// Set the src attribute of the <img> element to the corresponding image file
 imgElement.src = imageFileNames[dayOfWeek];
-
-// Set the text of the element with id "date-quote" to the corresponding day name
-document.getElementById("date-quote").textContent =
-  "สวัสดี" + dayNames[dayOfWeek];
+document.getElementById("date-quote").innerText ="สวัสดี" + dayNames[dayOfWeek];
