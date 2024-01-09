@@ -1,50 +1,3 @@
-const grid = document.querySelector(".grid");
-
-// Simple seeded random number generator
-function seededRandom(seed) {
-  var x = Math.sin(seed++) * 10000;
-  return x - Math.floor(x);
-}
-
-var today = new Date();
-var seed =
-  today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-
-function getBackgroundColor(value) {
-  if (value >= 98) return "#9be9a8";
-  if (value >= 96) return "#40c463";
-  if (value >= 94) return "#30a14e";
-  if (value >= 92) return "#30a14e";
-}
-
-function getDayOfYear(date) {
-  const start = new Date(date.getFullYear(), 0, 0);
-  const diff = date - start;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const day = Math.floor(diff / oneDay);
-  return day;
-}
-
-for (let i = 0; i < 100; i++) {
-  const cell = document.createElement("div");
-  cell.classList.add("cell");
-
-  const value = Math.floor(seededRandom(seed + i) * 100) + 1; // Random temperature value
-  const backgroundColor = getBackgroundColor(value);
-  cell.style.backgroundColor = backgroundColor;
-  if (value >= 92) cell.style.color = "#111111";
-  cell.textContent = i;
-  grid.appendChild(cell);
-}
-
-function getDayOfYear(date) {
-  const start = new Date(date.getFullYear(), 0, 0);
-  const diff = date - start;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const day = Math.floor(diff / oneDay);
-  return day;
-}
-
 var budda = [
   {
     date: "31-1-2564",
@@ -2244,16 +2197,36 @@ var budda = [
   },
 ];
 
-let dayOfYear = getDayOfYear(today);
+const grid = document.querySelector(".grid");
 
-data = budda[dayOfYear];
+// Simple seeded random number generator
+function seededRandom(seed) {
+  var x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
 
-var pali_quote = document.getElementById("pali-quote");
-var thai_quoto = document.getElementById("thai-quote");
-pali_quote.innerText = data["word"];
-thai_quoto.innerText = data["translation"];
+function getBackgroundColor(value) {
+  if (value >= 98) return "#9be9a8";
+  if (value >= 96) return "#40c463";
+  if (value >= 94) return "#30a14e";
+  if (value >= 92) return "#30a14e";
+}
 
-var dayOfWeek = today.getDay();
+function getDayOfYear(date) {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const day = Math.floor(diff / oneDay);
+  return day;
+}
+
+function getDayOfYear(date) {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const day = Math.floor(diff / oneDay);
+  return day;
+}
 
 // Array of image file names for each day of the week (adjust as needed)
 var imageFileNames = [
@@ -2277,6 +2250,75 @@ var dayNames = [
   "วันเสาร์",
 ];
 
-var imgElement = document.querySelector(".carousel-item.active img");
-imgElement.src = imageFileNames[dayOfWeek];
-document.getElementById("date-quote").innerText ="สวัสดี" + dayNames[dayOfWeek];
+var today = new Date();
+
+
+
+
+
+function update() {
+  var seed =
+    today.getFullYear() * 10000 +
+    (today.getMonth() + 1) * 100 +
+    today.getDate();
+
+  for (let i = 0; i < 100; i++) {
+    const cell = document.createElement("div");
+    cell.classList.add("cell");
+
+    const value = Math.floor(seededRandom(seed + i) * 100) + 1; // Random temperature value
+    const backgroundColor = getBackgroundColor(value);
+    cell.style.backgroundColor = backgroundColor;
+    if (value >= 92) cell.style.color = "#111111";
+    cell.textContent = i;
+    grid.appendChild(cell);
+  }
+
+  let dayOfYear = getDayOfYear(today);
+
+  data = budda[dayOfYear];
+
+  var pali_quote = document.getElementById("pali-quote");
+  var thai_quoto = document.getElementById("thai-quote");
+  pali_quote.innerText = data["word"];
+  thai_quoto.innerText = data["translation"];
+
+  var dayOfWeek = today.getDay();
+
+  var imgElement = document.querySelector(".carousel-item.active img");
+  imgElement.src = imageFileNames[dayOfWeek];
+  document.getElementById("date-quote").innerText =
+    "สวัสดี" + dayNames[dayOfWeek];
+}
+
+update();
+
+
+function addOneDay(date) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + 1);
+  update();
+  today = result;
+
+  return result;
+}
+
+
+function run(){
+
+  console.log('hello')
+  var counter = 0;
+
+  setInterval(function() {
+    if (counter < 100) {
+      today = addOneDay(today);
+      console.log(today); // Logs the updated date
+      counter++;
+    } else {
+      clearInterval(intervalId); // Stop the interval after 5 iterations
+    }
+  }, 500); // 5000 milliseconds = 5 seconds
+  
+
+}
+
