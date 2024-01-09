@@ -2257,6 +2257,10 @@ var today = new Date();
 
 
 function update() {
+
+
+  grid.innerHTML = '';
+
   var seed =
     today.getFullYear() * 10000 +
     (today.getMonth() + 1) * 100 +
@@ -2310,14 +2314,14 @@ function run(){
   var counter = 0;
 
   setInterval(function() {
-    if (counter < 100) {
+    if (counter < 300) {
       today = addOneDay(today);
       console.log(today); // Logs the updated date
       counter++;
     } else {
       clearInterval(intervalId); // Stop the interval after 5 iterations
     }
-  }, 500); // 5000 milliseconds = 5 seconds
+  }, 1000); // 5000 milliseconds = 5 seconds
   
 
 }
